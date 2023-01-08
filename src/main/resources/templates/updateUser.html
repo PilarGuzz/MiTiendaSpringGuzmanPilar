@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<form class="form-horizontal" th:action="@{/usuario/update/submit}"
+		th:object="${user}" th:method="POST">
+		<fieldset>
+
+			<!-- Form Name -->
+			<legend>Update Usuario</legend>
+			
+			<input type="hidden" value="${user.username}" th:field="*{username}">
+			<!-- Password input-->
+			<div class="form-group">
+				<label class="col-md-4 control-label" for="password">Password</label>
+				<div class="col-md-4">
+					<input id="password" name="password" type="password" placeholder=""
+						class="form-control input-md" th:field="*{pass}" required>
+
+				</div>
+			</div>
+
+			<!-- Password input-->
+			<div class="form-group">
+				<label class="col-md-4 control-label" for="repeatpassword">Repeat
+					Password</label>
+				<div class="col-md-4">
+					<input id="repeatpassword" name="repeatpassword" type="password"
+						placeholder="" class="form-control input-md" required>
+
+				</div>
+			</div>
+			
+			<!-- Text input-->
+			<div class="form-group">
+				<label class="col-md-4 control-label" for="name">Name</label>
+				<div class="col-md-4">
+					<input id="name" name="name" type="text" placeholder=""
+						class="form-control input-md" th:field="*{name}" required>
+				</div>
+			</div>
+			
+			<!-- Email input-->
+			<div class="form-group">
+				<label class="col-md-4 control-label" for="name">Email</label>
+				<div class="col-md-4">
+					<input id="email" name="email" type="email" placeholder=""
+						class="form-control input-md" th:field="*{email}" required>
+				</div>
+			</div>
+
+			<!-- Button -->
+			<div class="form-group">
+				<label class="col-md-4 control-label" for="singlebutton"></label>
+				<div class="col-md-4">
+					<button id="singlebutton" name="singlebutton"
+						class="btn btn-primary">Update</button>
+				</div>
+			</div>
+
+		</fieldset>
+	</form>
+</body>
+</html>
