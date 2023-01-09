@@ -24,7 +24,7 @@ CREATE DATABASE miTiendaSpringGuzmanPilar;
 USE `miTiendaSpringGuzmanPilar`;
 
 CREATE USER 'GuzmanPilar'@'%' IDENTIFIED BY 'GuzmanPilar';
-GRANT ALL PRIVILEGES ON ConstruccionesGuzman.* to 'GuzmanPilar'@'%';
+GRANT ALL PRIVILEGES ON miTiendaSpringGuzmanPilar.* to 'GuzmanPilar'@'%';
 
 -- --------------------------------------------------------
 
