@@ -7,8 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
+<div class="container">
 <form class="form-horizontal" th:action="@{/articulo/add/submit}"
-		th:object="${movie}" th:method="POST">
+		th:object="${material}" th:method="POST">
 		<fieldset>
 
 			<!-- Form Name -->
@@ -78,6 +79,6 @@
 
 		</fieldset>
 	</form>
-
+</div>
 </body>
 </html>

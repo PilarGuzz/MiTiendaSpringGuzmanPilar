@@ -30,7 +30,7 @@ public class MaterialController {
 	public String addItem(Model model) {
 
 		model.addAttribute("categories", categoryService.getCategories());
-		model.addAttribute("movie", new Material());
+		model.addAttribute("material", new Material());
 
 		return "addMaterial";
 	}

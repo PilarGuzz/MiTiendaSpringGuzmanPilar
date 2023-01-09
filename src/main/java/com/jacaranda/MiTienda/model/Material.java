@@ -4,6 +4,7 @@ package com.jacaranda.MiTienda.model;
 import java.util.Objects;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -13,6 +14,7 @@ public class Material {
 
 		
 		@Id
+		@GeneratedValue
 		private Integer id;
 		private String name;
 		private String description;
@@ -33,9 +35,9 @@ public class Material {
 
 
 
-		public Material(Integer id, String name, String description, double price, int stock, Category category) {
+		public Material( String name, String description, double price, int stock, Category category) {
 			super();
-			this.id = id;
+			
 			this.name = name;
 			this.description = description;
 			this.price = price;

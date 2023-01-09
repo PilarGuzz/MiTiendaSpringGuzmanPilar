@@ -7,6 +7,7 @@
 
 </head>
 <body>
+	<div class="container">
 <form class="form-horizontal" th:action="@{/categoria/delete/submit}"
 		th:object="${category}" th:method="POST">
 		<fieldset>
@@ -44,7 +45,7 @@
 				<div class="col-md-4">
 					<button id="addItem" name="addItem" class="btn btn-primary">Delete
 						Category</button>
-					<a href="/articulo/list"><button type="button"
+					<a href="/categoria/list"><button type="button"
 							class="btn btn-danger">Cancel</button></a>
 				</div>
 			</div>
@@ -52,6 +53,6 @@
 		</fieldset>
 	</form>
 
-
+</div>
 </body>
 </html>

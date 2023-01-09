@@ -7,16 +7,24 @@
 
 </head>
 <body>
+<div class="container">
 
 <form class="form-horizontal" th:action="@{/articulo/delete/submit}"
-		th:object="${movie}" th:method="POST">
+		th:object="${material}" th:method="POST">
 		<fieldset>
 
 			<!-- Form Name -->
 			<legend>Delete Material</legend>
 
 			<!-- Text input-->
-			<input type="number" th:field="*{id}" readonly required>
+			
+			<div class="form-group">
+				<label class="col-md-4 control-label" for="name">Id</label>
+				<div class="col-md-4">
+					<input type="number" th:field="*{id}" class="form-control input-md" readonly required>
+
+				</div>
+			</div>
 
 			<!-- Text input-->
 			<div class="form-group">
@@ -24,6 +32,15 @@
 				<div class="col-md-4">
 					<input id="name" name="name" type="text"
 						class="form-control input-md" th:field="*{name}" readonly required>
+
+				</div>
+			</div>
+			<!-- Text input-->
+			<div class="form-group">
+				<label class="col-md-4 control-label" for="name">Description</label>
+				<div class="col-md-4">
+					<input id="description" name="description" type="text"
+						class="form-control input-md" th:field="*{description}" readonly required>
 
 				</div>
 			</div>
@@ -43,6 +60,6 @@
 
 		</fieldset>
 	</form>
-
+</div>
 </body>
 </html>

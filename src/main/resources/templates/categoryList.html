@@ -8,19 +8,21 @@
 </head>
 <body>
 <div class="container">
-	<form class="form-horizontal" method="GET" action="/categoria/add">
+<form class="form-horizontal" method="GET" action="/categoria/add">
             <fieldset>
                 <!-- Button -->
                 <div class="form-group">
-                    <label class="col-md-4 control-label" for="addCategory"></label>
+                    <label class="col-md-4 control-label" for="addCat"></label>
                     <div class="col-md-4">
-                        <button id="addCategory" name="addCategory" class="btn btn-primary">Add
+                        <button id="addCat" name="addCat" class="btn btn-primary">Add
                             Category</button>
                     </div>
                 </div>
 
             </fieldset>
         </form>
+        
+	
 		<div class="starter-template">
 		
 			<h1>Material Category</h1>
@@ -30,6 +32,8 @@
 						<th>ID</th>
 						<th>Name</th>
 						<th>DESCRIPTION</th>
+						<th>DELETE</th>
+						<th>UPDATE</th>
 						
 					</tr>
 				</thead>
@@ -40,11 +44,11 @@
 						<td th:text="${category.description}"></td>
 						
 						
-						  <td><a th:href="@{'/categoria/delete'(id=${category.id},name=${category.name},description=${category.description})}">
+						  <td><a th:href="@{'/categoria/delete'(id=${category.id})}">
                             <button>Borrar</button>
                         </a></td>
                         
-						  <td><a th:href="@{'/categoria/update'(id=${category.id},name=${category.name},description=${category.description})}">
+						  <td><a th:href="@{'/categoria/update'(id=${category.id})}">
                             <button>Actualizar</button>
                         </a></td>
 					</tr>

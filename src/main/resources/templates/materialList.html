@@ -8,19 +8,19 @@
 </head>
 <body>
 <div class="container">
-	<form class="form-horizontal" method="GET" action="/articulo/add">
-            <fieldset>
+	
+           
                 <!-- Button -->
                 <div class="form-group">
-                    <label class="col-md-4 control-label" for="addMovie"></label>
+                    <label class="col-md-4 control-label" for="addMaterial"></label>
                     <div class="col-md-4">
-                        <button id="addUser" name="addMovie" class="btn btn-primary">Add
-                            Material</button>
+                        <a th:href="@{'/articulo/add'}">
+                            <button  id="addMat" name="addMat" class="btn btn-primary">Add Material</button></a>
                     </div>
                 </div>
 
-            </fieldset>
-        </form>
+            
+       
 		<div class="starter-template">
 		
 			<h1>Material</h1>
@@ -33,10 +33,12 @@
 						<th>PRICE</th>
 						<th>CATEGORY</th>
 						<th>STOCK</th>
+						<th>DELETE</th>
+						<th>UPDATE</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="movie :${materials}">
+					<tr th:each="material :${materials}">
 						<td th:text="${material.id}"></td>
 						<td th:text="${material.name}"></td>
 						<td th:text="${material.description}"></td>
@@ -44,11 +46,11 @@
 						<td th:text="${material.category.name}"></td>
 						<td th:text="${material.stock}"></td>
 						
-						  <td><a th:href="@{'/articulo/delete'(id=${material.id},name=${material.name})}">
+						  <td><a th:href="@{'/articulo/delete'(id=${material.id})}">
                             <button>Borrar</button>
                         </a></td>
                         
-						 <td><a th:href="@{'/articulo/update'(id=${material.id},name=${material.name})}">
+						 <td><a th:href="@{'/articulo/update'(id=${material.id})}">
                             <button>Actualizar</button>
                         </a></td>
 					</tr>

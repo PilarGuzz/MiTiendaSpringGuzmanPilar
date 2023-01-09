@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,7 +18,6 @@ import com.jacaranda.MiTienda.service.CategoryService;
 public class CategoryController {
 
 	private static final String REDIRECT_CATEGORY = "redirect:/categoria/list";
-	private static final String MODEL_NAME = "category";
 
 	@Autowired
 	private CategoryService service;
@@ -26,7 +26,7 @@ public class CategoryController {
 	public String categoriesList(Model model) {
 
 		List<Category> categories = service.getCategories();
-		model.addAttribute("categories", service.getCategories());
+		model.addAttribute("categories", categories);
 
 		return "categoryList";
 	}
@@ -34,12 +34,12 @@ public class CategoryController {
 	@GetMapping("/categoria/add")
 	public String addCategory(Model model) {
 
-		model.addAttribute(MODEL_NAME, new Category());
+		model.addAttribute("category", new Category());
 
 		return "addCategoria";
 	}
 
-	@PostMapping("/categoria/add/submit")
+	@PostMapping("categoria/add/submit")
 	public String addCategorySubmit(@ModelAttribute Category category) {
 
 		if (service.addCategory(category) != null) {
@@ -52,7 +52,7 @@ public class CategoryController {
 	@GetMapping("/categoria/delete")
 	public String deleteCategory(@RequestParam("id") Integer id, Model model) {
 
-		model.addAttribute(MODEL_NAME, service.getCategory(id));
+		model.addAttribute("category", service.getCategory(id));
 
 		return "deleteCategory";
 	}
@@ -70,7 +70,7 @@ public class CategoryController {
 	@GetMapping("/categoria/update")
 	public String updateCategory(@RequestParam("id") Integer id, Model model) {
 
-		model.addAttribute(MODEL_NAME, service.getCategory(id));
+		model.addAttribute("category", service.getCategory(id));
 
 		return "updateCategory";
 	}

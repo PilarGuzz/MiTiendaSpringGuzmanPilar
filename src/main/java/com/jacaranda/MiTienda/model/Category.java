@@ -8,6 +8,7 @@ import org.hibernate.cache.spi.support.AbstractReadWriteAccess.Item;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
@@ -22,9 +23,9 @@ public class Category {
 	@OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
 	List<Material> materialList;
 
-	public Category(Integer id, String name, String description) {
+	public Category(String name, String description) {
 		super();
-		this.id = id;
+	
 		this.name = name;
 		this.description = description;
 		this.materialList = null;

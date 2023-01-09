@@ -7,19 +7,20 @@
 
 </head>
 <body>
+<div class="container">
 <form class="form-horizontal" th:action="@{/categoria/update/submit}"
 		th:object="${category}" th:method="POST">
 		<fieldset>
 
 			<!-- Form Name -->
-			<legend>Categoria</legend>
+			<legend>Update Category</legend>
 
 			<!-- Text input-->
 			<div class="form-group">
 				<label class="col-md-4 control-label" for="id">Id</label>
 				<div class="col-md-4">
-					<input id="id" name="id" type="hidden" class="form-control input-md"
-						th:field="*{id}" required>
+					<input id="id" name="id" type="text" class="form-control input-md"
+						th:field="*{id}" readonly required>
 
 				</div>
 			</div>
@@ -51,13 +52,13 @@
 				<div class="col-md-4">
 					<button id="addItem" name="addItem" class="btn btn-primary">Add
 						Item</button>
-					<a href="/articulo/list"><button type="button"
+					<a href="/categoria/list"><button type="button"
 							class="btn btn-danger">Cancel</button></a>
 				</div>
 			</div>
 
 		</fieldset>
 	</form>
-
+</div>
 </body>
 </html>
