@@ -46,7 +46,7 @@ public class UserController {
 	}
 
 	@GetMapping("usuario/delete")
-	public String deleteUser(@RequestParam("username") String username, Model model) {
+	public String deleteUser(@RequestParam("id") String username, Model model) {
 
 		User user = service.getUser(username);
 		model.addAttribute("user", user);
@@ -63,7 +63,7 @@ public class UserController {
 	}
 
 	@GetMapping("usuario/update")
-	public String updateUser(@RequestParam("username") String id, Model model) {
+	public String updateUser(@RequestParam("id") String id, Model model) {
 
 		User user = service.getUser(id);
 		model.addAttribute("user", user);
@@ -80,7 +80,7 @@ public class UserController {
 	}
 
 	@GetMapping("usuario/admin")
-	public String updateUserAdmin(@RequestParam("username") String id, Model model) {
+	public String updateUserAdmin(@RequestParam("id") String id, Model model) {
 
 		User user = service.getUser(id);
 		model.addAttribute("user", user);

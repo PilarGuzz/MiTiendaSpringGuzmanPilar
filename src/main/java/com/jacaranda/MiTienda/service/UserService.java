@@ -30,7 +30,7 @@ public class UserService {
 		}
 
 		public User addUser(User user) {
-			user.setPassword(getMD5(user.getPassword()));
+			user.setPass(getMD5(user.getPass()));
 			user.setAdmin(false);
 			
 
@@ -39,7 +39,7 @@ public class UserService {
 
 		public User updateUser(User modUser) {
 			User user = this.getUser(modUser.getUsername());
-			user.setPassword(getMD5(modUser.getPassword()));
+			user.setPass(getMD5(modUser.getPass()));
 			user.setName(modUser.getName());
 			user.setEmail(modUser.getEmail());
 			return repository.save(user);

@@ -5,6 +5,10 @@
 </head>
 <body>
 	<div class="container">
+	<div class="header">
+	
+	
+	</div>
 	<form class="form-horizontal" method="GET" action="/usuario/add">
             <fieldset>
                 <!-- Button -->
@@ -28,6 +32,9 @@
 						<th>NAME</th>
 						<th>EMAIL</th>
 						<th>ADMIN</th>
+						<th>ADMIN UPDATE</th>
+						<th>USER UPDATE </th>
+						<th>DELETE</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -35,15 +42,18 @@
 						<td th:text="${user.username}"></td>
 						<td th:text="${user.name}"></td>
 						<td th:text="${user.email}"></td>
-						<td th:text="${user.admin}"></td>
+						<td th:text="${user.admin}"> </td>
 						
-						  <td><a th:href="@{'/usuario/delete'(username=${user.username},name=${user.name})}">
+                        <td><a th:href="@{'/usuario/admin'(id=${user.username})}">
+                            <button>Actualizar Rol</button>
+                        </a></td>
+						 <td><a th:href="@{'/usuario/update'(id=${user.username})}">
+                            <button>Actualizar</button>
+                        </a></td>
+						  <td><a th:href="@{'/usuario/delete'(id=${user.username})}">
                             <button>Borrar</button>
                         </a></td>
                         
-						 <td><a th:href="@{'/usuario/update'(username=${user.username},name=${user.name})}">
-                            <button>Actualizar</button>
-                        </a></td>
 					</tr>
 				</tbody>
 			</table>
