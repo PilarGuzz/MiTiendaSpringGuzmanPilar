@@ -23,7 +23,7 @@ public class MaterialService {
 	}
 
 	public Material addItem(Material material) {
-		if (material.getId() != null && material.getName() != null && material.getDescription() != null
+		if (material.getName() != null && material.getDescription() != null
 				&& material.getStock() > 0 && material.getPrice() > 0) {
 			return repository.save(material);
 		}

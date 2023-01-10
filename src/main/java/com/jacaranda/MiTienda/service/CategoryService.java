@@ -32,7 +32,7 @@ public class CategoryService {
 			
 			List<Material> listMaterial= new ArrayList<>();
 			
-			if (category.getId() != null && category.getName()!=null && category.getDescription() != null) {
+			if ( category.getName()!=null && category.getDescription() != null) {
 				category.setMaterialList(listMaterial);
 				saved = repository.save(category);
 			}

@@ -8,19 +8,16 @@
 </head>
 <body>
 <div class="container">
-<form class="form-horizontal" method="GET" action="/categoria/add">
-            <fieldset>
-                <!-- Button -->
+
+  <!-- Button -->
                 <div class="form-group">
-                    <label class="col-md-4 control-label" for="addCat"></label>
+                    <label class="col-md-4 control-label" for="addMaterial"></label>
                     <div class="col-md-4">
-                        <button id="addCat" name="addCat" class="btn btn-primary">Add
-                            Category</button>
+                        <a th:href="@{'/categoria/add'}">
+                            <button  id="addCat" name="addCat" class="btn btn-primary">Add Category</button></a>
                     </div>
                 </div>
 
-            </fieldset>
-        </form>
         
 	
 		<div class="starter-template">
