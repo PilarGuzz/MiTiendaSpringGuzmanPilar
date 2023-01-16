@@ -3,6 +3,10 @@ package com.jacaranda.MiTienda.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.jacaranda.MiTienda.model.Material;
@@ -14,8 +18,17 @@ public class MaterialService {
 	@Autowired
 	private MaterialRepository repository;
 
-	public List<Material> getItems() {
+	public List<Material> findAll() {
 		return repository.findAll();
+	}
+	public Page<Material> findAll(int pageNum, int pageSize, String sortField, String stringFind) {
+		
+		Pageable pageable = PageRequest.of(pageNum-1, pageSize, 
+				Sort.by(sortField).ascending());
+		if(stringFind == null)
+			return repository.findAll(pageable);
+		else
+			return repository.findByNameLike("%" + stringFind + "%", pageable);
 	}
 
 	public Material getItem(Integer id) {
@@ -40,25 +53,26 @@ public class MaterialService {
 
 		return deleted;
 	}
+	
 
 	public Material updateItem(Material material) {
-		Material movies = null;
+		Material mat = null;
 		if (material.getId() != null && material.getName() != null && material.getDescription() != null
 				&& material.getStock() > 0 && material.getCategory() != null && material.getPrice() > 0) {
-			movies = this.getItem(material.getId());
+			mat = this.getItem(material.getId());
 
-			movies.setName(material.getName());
+			mat.setName(material.getName());
 			;
-			movies.setDescription(material.getDescription());
-			movies.setPrice(material.getPrice());
-			movies.setStock(material.getStock());
-			movies.setCategory(material.getCategory());
+			mat.setDescription(material.getDescription());
+			mat.setPrice(material.getPrice());
+			mat.setStock(material.getStock());
+			mat.setCategory(material.getCategory());
 			;
 
-			movies = repository.save(movies);
+			mat = repository.save(mat);
 		}
 
-		return movies;
+		return mat;
 	}
 
 }

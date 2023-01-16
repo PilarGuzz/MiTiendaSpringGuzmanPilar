@@ -1,8 +1,10 @@
 package com.jacaranda.MiTienda.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.jacaranda.MiTienda.model.Material;
-import com.jacaranda.MiTienda.model.User;
 import com.jacaranda.MiTienda.service.CategoryService;
 import com.jacaranda.MiTienda.service.MaterialService;
 
@@ -77,11 +78,28 @@ public class MaterialController {
 	}
 
 	@GetMapping("articulo/list")
-	public String itemList(Model model) {
-		List<Material> materials = service.getItems();
-		model.addAttribute("materials", materials);
+	public String itemList(Model model, @RequestParam("pageNumber")
+	
+		Optional<Integer> pageNumber,
+		@RequestParam("sizeNumber") Optional<Integer> sizeNumber,
+		@RequestParam("sortField") Optional<String> sortField,
+		@RequestParam("stringFind") Optional<String> stringFind) {
+		
 
+		Page<Material> page = service.findAll(pageNumber.orElse(1),
+				sizeNumber.orElse(10), sortField.orElse("id"), stringFind.orElse(null));
+		model.addAttribute("currentPage",pageNumber.orElse(1));
+		model.addAttribute("totalPages",page.getTotalPages());
+		model.addAttribute("totalItems",page.getTotalElements());
+		model.addAttribute("sortField", sortField.orElse("id"));
+		model.addAttribute("keyword", stringFind.orElse(null));
+		model.addAttribute("materials", page.getContent());
+		
 		return "materialList";
+		
+//		List<Material> materials = service.getItems();
+//		model.addAttribute("materials", materials);
+//		return "materialList";
 	}
 
 }

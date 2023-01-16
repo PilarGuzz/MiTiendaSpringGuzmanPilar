@@ -187,17 +187,20 @@ CREATE TABLE `user` (
   `pass` varchar(32) DEFAULT NULL,
   `name` varchar(50) DEFAULT NULL,
   `email` varchar(50) DEFAULT NULL,
-  `admin` tinyint(1) DEFAULT NULL
+  `admin` tinyint(1) DEFAULT NULL,
+  `role` varchar(50) DEFAULT NULL,
+  `verification_code` varchar(64) DEFAULT NULL,
+  `enabled` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `user`
 --
 
-INSERT INTO `user` (`username`, `pass`, `name`, `email`, `admin`) VALUES
-('inma', 'd40dbcae0e7088fc4a7e1768cf8771da', 'inma', 'inma@gmail.com', 1),
-('paco', '311020666a5776c57d265ace682dc46d', 'paco', 'paco@gmail.com', 0),
-('pilar', '31c7d084f0460fcde98ee9314fc8ef30', 'pilar', 'pilar@gmail.com', 1);
+INSERT INTO `user` (`username`, `pass`, `name`, `email`, `admin`, `role`, `verification_code`, `enabled`) VALUES
+('inma', 'd40dbcae0e7088fc4a7e1768cf8771da', 'inma', 'inma@gmail.com', 1, 'ADMIN', null, 1),
+('paco', '311020666a5776c57d265ace682dc46d', 'paco', 'paco@gmail.com', 0, 'USER', null, 1),
+('pilar', '31c7d084f0460fcde98ee9314fc8ef30', 'pilar', 'pilar@gmail.com', 1, 'ADMIN', null, 1);
 
 -- --------------------------------------------------------
 

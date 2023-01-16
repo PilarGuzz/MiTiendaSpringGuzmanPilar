@@ -1,13 +1,38 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
 <title>Material</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 
 </head>
 <body>
-<div class="container">
+
+
+	<nav class="navbar navbar-dark bg-secundary">
+	<div class='container'>
+			<a th:href="@{/articulo/list?stringFind=}"><button type="button"
+					class="btn btn-primary">Listado</button></a> <a
+				th:href="@{/addElement}"><button type="button"
+					class="btn btn-primary">Añadir</button></a>
+			<button type="button" class="btn btn-primary">
+				<span th:text=${#authentication.name}></span>
+			</button>
+		<form class="form-inline">
+			&nbsp; Filter: <input th:value="${keyword}" name="stringFind"
+				id="stringFind" class="form-control" type="text"
+				placeholder="Search" aria-label="Search"> &nbsp; <a
+				th:href="@{/}">
+				<button class="btn btn-success my-2 my-sm-0" type="submit"
+					onClick="clearSearch()">Search</button>
+			</a> &nbsp; <a th:href="@{/logout}"><button type="button"
+					class="btn btn-warning">Log Out</button></a>
+
+		</form>
+		</div>
+
+	</nav>
+	<div class="container">
 	
            
                 <!-- Button -->
@@ -27,12 +52,12 @@
 			<table class="table">
 				<thead>
 					<tr>
-						<th>ID</th>
-						<th>NAME</th>
-						<th>DESCRIPTION</th>
-						<th>PRICE</th>
-						<th>CATEGORY</th>
-						<th>STOCK</th>
+						<th><a th:href="@{'/articulo/list?sortField=id&pageNumber=' + ${currentPage} +'&stringFind=' + ${keyword} }">ID</a></th>
+						<th><a th:href="@{'/articulo/list?sortField=name&pageNumber=' + ${currentPage} +'&stringFind=' + ${keyword} }">NAME</a></th>
+						<th><a th:href="@{'/articulo/list?sortField=description&pageNumber=' + ${currentPage}+'&stringFind=' + ${keyword}}">DESCRIPTION</a></th>
+						<th><a th:href="@{'/articulo/list?sortField=category&pageNumber=' + ${currentPage}+'&stringFind=' + ${keyword}}">CATEGORY</a></th>
+						<th><a th:href="@{'/articulo/list?sortField=price&pageNumber=' + ${currentPage}+'&stringFind=' + ${keyword}}">PRECIO</a></th>
+						<th><a th:href="@{'/articulo/list?sortField=stock&pageNumber=' + ${currentPage}+'&stringFind=' + ${keyword}}">STOCK</a></th>
 						<th>DELETE</th>
 						<th>UPDATE</th>
 					</tr>
@@ -42,8 +67,8 @@
 						<td th:text="${material.id}"></td>
 						<td th:text="${material.name}"></td>
 						<td th:text="${material.description}"></td>
-						<td th:text="${material.price}"></td>
 						<td th:text="${material.category.name}"></td>
+						<td th:text="${material.price}"></td>
 						<td th:text="${material.stock}"></td>
 						
 						  <td><a th:href="@{'/articulo/delete'(id=${material.id})}">
@@ -57,6 +82,27 @@
 				</tbody>
 			</table>
 		</div>
+		
+	<div>
+	Total Items: <a th:text = "${totalItems}" />
+	<a th:if="${currentPage > 1}" th:href="@{'/articulo/list?pageNumber=1&sortField=' + ${sortField}+'&stringFind=' + ${keyword}}">
+	First</a>
+	<span th:unless="${currentPage > 1}">First</span>
+	<a th:if="${currentPage > 1}" th:href="@{'/articulo/list?pageNumber=' + ${currentPage - 1} +'&sortField=' + ${sortField}+'&stringFind=' + ${keyword}}">Previous</a>
+	<span th:unless="${currentPage > 1}">Previous</span>
+	
+	<span th:each="i: ${#numbers.sequence(1, totalPages)}">
+		<a th:if="${currentPage != i}" th:href="@{'/articulo/list?pageNumber=' + ${i} +'&sortField=' + ${sortField}+'&stringFind=' + ${keyword}}" th:text="${i}"></a>
+		<span th:unless="${currentPage != i}" th:text="${i}"></span>
+	&nbsp;
+	</span>
+	
+	<a th:if="${currentPage < totalPages}" th:href="@{'/articulo/list?pageNumber=' + ${currentPage + 1} +'&sortField=' + ${sortField}+'&stringFind=' + ${keyword}}">Next</a>
+	<span th:unless="${currentPage < totalPages}">Next</span>
+	<a th:if="${currentPage < totalPages}" th:href="@{'/articulo/list?pageNumber=' + ${totalPages} +'&sortField=' + ${sortField}+'&stringFind=' + ${keyword}}">Last</a>
+	<span th:unless="${currentPage < totalPages}">Last</span> 
+	</div>
+	</div>
 	</div>
 </body>
 </html>
