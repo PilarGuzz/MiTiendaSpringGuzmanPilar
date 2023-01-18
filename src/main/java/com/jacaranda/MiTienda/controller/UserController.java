@@ -1,5 +1,6 @@
 package com.jacaranda.MiTienda.controller;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.jacaranda.MiTienda.model.User;
 import com.jacaranda.MiTienda.service.UserService;
+
+import jakarta.mail.MessagingException;
+import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
 public class UserController {
@@ -26,6 +30,32 @@ public class UserController {
 
 		return "login";
 
+	}
+	
+	@GetMapping("/signUp")
+	public String showRegistrationForm(Model model) {
+		model.addAttribute("user", new User());
+		return "signUp";
+	}
+	
+	@GetMapping("/signUp/submit")
+	public String processRegister(@ModelAttribute("user") User user, HttpServletRequest request){
+		
+		String siteURL = request.getRequestURL().toString();
+		siteURL = siteURL.replace(request.getServletPath(), "");
+		user.setRole("USER");
+		
+		if(service.checkExist(user)) {
+			try {
+			service.add(user, siteURL);
+			}catch (UnsupportedEncodingException e) {
+				return "error";
+			}catch (MessagingException e) {
+				return "error";
+			}
+			return "register_success";
+		}else
+			return "error";
 	}
 
 	@GetMapping("/usuario/add")
@@ -96,13 +126,25 @@ public class UserController {
 		return REDIRECT_USER;
 	}
 
-	@GetMapping({ "usuario/list", "/" })
+	@GetMapping("usuario/list")
 	public String getUsers(Model model) {
 
 		List<User> users = service.getUsers();
 		model.addAttribute("users", users);
 
 		return "usersList";
+	}
+	
+	@GetMapping("/verify")
+	public String verification(@RequestParam("code") String code, @RequestParam("username")String username) {
+
+		if(service.checkVerify(code, username)) {
+			return "verificationSuccess";
+	
+		}else {
+			return "error";
+		}
+
 	}
 
 }

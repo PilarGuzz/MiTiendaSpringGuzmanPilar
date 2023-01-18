@@ -7,11 +7,43 @@
 
 </head>
 <body>
+<!-- _____________________CABECERA __________________________________________ -->
+<nav class="navbar navbar-expand-lg bg-body-tertiary bg-dark" data-bs-theme="dark">
+  <div class="container-fluid">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+      <a class="navbar-brand" href="#">Hidden brand</a>
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+           <a class="nav-link " th:href="@{/articulo/list?stringFind=}">Materiales</a>
+        </li>
+        <li class="nav-item">
+           <a class="nav-link " th:href="@{/categoria/list?stringFind=}">Categorias</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled">Disabled</a>
+        </li>
+      </ul>
+      <form class="d-flex" role="search">
+     
+        <input  th:value="${keyword}" name="stringFind" id="stringFind"   class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>
+
+<!-- _____________________FIN CABECERA __________________________________________ -->
 <div class="container">
 
   <!-- Button -->
                 <div class="form-group">
-                    <label class="col-md-4 control-label" for="addMaterial"></label>
+                    <label class="col-md-4 control-label" for="addCat"></label>
                     <div class="col-md-4">
                         <a th:href="@{'/categoria/add'}">
                             <button  id="addCat" name="addCat" class="btn btn-primary">Add Category</button></a>
@@ -26,9 +58,9 @@
 			<table class="table">
 				<thead>
 					<tr>
-						<th>ID</th>
-						<th>Name</th>
-						<th>DESCRIPTION</th>
+						<th><a th:href="@{'/categoria/list?sortField=id&pageNumber=' + ${currentPage} +'&stringFind=' + ${keyword} }">ID</a></th>
+						<th><a th:href="@{'/categoria/list?sortField=name&pageNumber=' + ${currentPage} +'&stringFind=' + ${keyword} }">NAME</a></th>
+						<th><a th:href="@{'/categoria/list?sortField=description&pageNumber=' + ${currentPage} +'&stringFind=' + ${keyword} }">DESCRIPTION</a></th>
 						<th>DELETE</th>
 						<th>UPDATE</th>
 						
@@ -52,6 +84,27 @@
 				</tbody>
 			</table>
 		</div>
+		
+		<!-- __________________PAGINAS___________________ -->
+			<div>
+	Total Items: <a th:text = "${totalItems}" />
+	<a th:if="${currentPage > 1}" th:href="@{'/categoria/list?pageNumber=1&sortField=' + ${sortField}+'&stringFind=' + ${keyword}}">
+	First</a>
+	<span th:unless="${currentPage > 1}">First</span>
+	<a th:if="${currentPage > 1}" th:href="@{'/categoria/list?pageNumber=' + ${currentPage - 1} +'&sortField=' + ${sortField}+'&stringFind=' + ${keyword}}">Previous</a>
+	<span th:unless="${currentPage > 1}">Previous</span>
+	
+	<span th:each="i: ${#numbers.sequence(1, totalPages)}">
+		<a th:if="${currentPage != i}" th:href="@{'/categoria/list?pageNumber=' + ${i} +'&sortField=' + ${sortField}+'&stringFind=' + ${keyword}}" th:text="${i}"></a>
+		<span th:unless="${currentPage != i}" th:text="${i}"></span>
+	&nbsp;
+	</span>
+	
+	<a th:if="${currentPage < totalPages}" th:href="@{'/categoria/list?pageNumber=' + ${currentPage + 1} +'&sortField=' + ${sortField}+'&stringFind=' + ${keyword}}">Next</a>
+	<span th:unless="${currentPage < totalPages}">Next</span>
+	<a th:if="${currentPage < totalPages}" th:href="@{'/categoria/list?pageNumber=' + ${totalPages} +'&sortField=' + ${sortField}+'&stringFind=' + ${keyword}}">Last</a>
+	<span th:unless="${currentPage < totalPages}">Last</span> 
+	</div>
 	</div>
 
 </body>

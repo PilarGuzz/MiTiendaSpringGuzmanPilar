@@ -30,7 +30,7 @@ public class MaterialController {
 	@GetMapping("articulo/add")
 	public String addItem(Model model) {
 
-		model.addAttribute("categories", categoryService.getCategories());
+		model.addAttribute("categories", categoryService.findAll());
 		model.addAttribute("material", new Material());
 
 		return "addMaterial";
@@ -63,7 +63,7 @@ public class MaterialController {
 	@GetMapping("/articulo/update")
 	public String updateItem(@RequestParam Integer id, Model model) {
 
-		model.addAttribute("categories", categoryService.getCategories());
+		model.addAttribute("categories", categoryService.findAll());
 		model.addAttribute("material", service.getItem(id));
 
 		return "updateMaterial";

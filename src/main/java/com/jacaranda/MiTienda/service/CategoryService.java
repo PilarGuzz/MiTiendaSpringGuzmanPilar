@@ -5,6 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.jacaranda.MiTienda.model.Category;
@@ -19,8 +23,18 @@ public class CategoryService {
 		private CategoryRepository repository;
 
 		
-		public List<Category> getCategories() {
+		public List<Category> findAll() {
 			return repository.findAll();
+		}
+		
+		public Page<Category> findAll(int pageNum, int pageSize, String sortField, String stringFind) {
+			
+			Pageable pageable = PageRequest.of(pageNum-1, pageSize, 
+					Sort.by(sortField).ascending());
+			if(stringFind == null)
+				return repository.findAll(pageable);
+			else
+				return repository.findByNameLike("%" + stringFind + "%", pageable);
 		}
 		
 		public Category getCategory(Integer id) {

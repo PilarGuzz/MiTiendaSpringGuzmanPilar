@@ -28,14 +28,15 @@ public class User implements UserDetails {
 		public User() {
 		}
 
-		public User(String username, String password, String name, String email, boolean admin) {
+		public User(String username, String password, String name, String email) {
 			super();
 			this.username = username;
 			this.pass = password;
 			this.name = name;
 			this.email = email;
-			this.admin = admin;
+			this.admin = false;
 			this.enabled = false;
+			this.role = "USER";
 		}
 
 		public String getUsername() {
@@ -48,6 +49,10 @@ public class User implements UserDetails {
 
 		public String getPass() {
 			return pass;
+		}
+		
+		public void setPassword(String password) {
+			this.pass = password;
 		}
 
 		public void setPass(String password) {
@@ -76,6 +81,26 @@ public class User implements UserDetails {
 
 		public void setAdmin(boolean admin) {
 			this.admin = admin;
+		}
+		
+		public String getRole() {
+			return role;
+		}
+
+		public void setRole(String role) {
+			this.role = role;
+		}
+		
+		public String getVerificationCode() {
+			return verificationCode;
+		}
+		
+		public void setVerificationCode(String verificationCode) {
+			this.verificationCode = verificationCode;
+		}
+		
+		public void setEnabled(Boolean enabled) {
+			this.enabled = enabled;
 		}
 		
 

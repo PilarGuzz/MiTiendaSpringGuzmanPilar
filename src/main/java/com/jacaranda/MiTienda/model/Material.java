@@ -165,7 +165,7 @@ public class Material {
 		@Override
 		public String toString() {
 			return "Material [id=" + id + ", name=" + name + ", description=" + description + ", price=" + price
-					+ ", stock=" + stock + ", category_id=" + category + "]";
+					+ ", stock=" + stock + ", category=" + category.getName() + "]";
 		}
 		
 		

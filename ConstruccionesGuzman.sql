@@ -184,7 +184,7 @@ INSERT INTO `material` (`id`, `name`, `description`, `price`, `category`) VALUES
 
 CREATE TABLE `user` (
   `username` varchar(50) NOT NULL,
-  `pass` varchar(32) DEFAULT NULL,
+  `pass` varchar(100) DEFAULT NULL,
   `name` varchar(50) DEFAULT NULL,
   `email` varchar(50) DEFAULT NULL,
   `admin` tinyint(1) DEFAULT NULL,
