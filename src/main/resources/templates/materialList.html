@@ -12,17 +12,18 @@
 
 <nav class="navbar navbar-expand-lg bg-body-tertiary bg-dark" data-bs-theme="dark">
   <div class="container-fluid">
+    <div class="container">
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-      <a class="navbar-brand" href="#">Hidden brand</a>
+      <a class="navbar-brand" href="#">Construcciones Guzmán</a>
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-           <a class="nav-link " th:href="@{/articulo/list?stringFind=}">Materiales</a>
+           <a class="nav-link " th:href="@{/categoria/list?stringFind=}">Categorias</a>
         </li>
         <li class="nav-item">
-           <a class="nav-link " th:href="@{/categoria/list?stringFind=}">Categorias</a>
+           <a class="nav-link " th:href="@{/articulo/list?stringFind=}">Materiales</a>
         </li>
         
           <li class="nav-item">
@@ -38,6 +39,7 @@
         <input  th:value="${keyword}" name="stringFind" id="stringFind"   class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success" type="submit">Search</button>
       </form>
+     </div>
     </div>
   </div>
 </nav>
@@ -65,12 +67,12 @@
 			<table class="table">
 				<thead>
 					<tr>
-						<th><a th:href="@{'/articulo/list?sortField=id&pageNumber=' + ${currentPage} +'&stringFind=' + ${keyword} }">ID</a></th>
-						<th><a th:href="@{'/articulo/list?sortField=name&pageNumber=' + ${currentPage} +'&stringFind=' + ${keyword} }">NAME</a></th>
-						<th><a th:href="@{'/articulo/list?sortField=description&pageNumber=' + ${currentPage}+'&stringFind=' + ${keyword}}">DESCRIPTION</a></th>
-						<th><a th:href="@{'/articulo/list?sortField=category&pageNumber=' + ${currentPage}+'&stringFind=' + ${keyword}}">CATEGORY</a></th>
-						<th><a th:href="@{'/articulo/list?sortField=price&pageNumber=' + ${currentPage}+'&stringFind=' + ${keyword}}">PRECIO</a></th>
-						<th><a th:href="@{'/articulo/list?sortField=stock&pageNumber=' + ${currentPage}+'&stringFind=' + ${keyword}}">STOCK</a></th>
+						<th><a th:href="@{'/articulo/list?sortField=id&pageNumber=' + ${currentPage} +'&stringFind=' + ${keyword} + '&idCategory=' + ${idCategory}}">ID</a></th>
+						<th><a th:href="@{'/articulo/list?sortField=name&pageNumber=' + ${currentPage} +'&stringFind=' + ${keyword} + '&idCategory=' + ${idCategory} }">NAME</a></th>
+						<th><a th:href="@{'/articulo/list?sortField=description&pageNumber=' + ${currentPage}+'&stringFind=' + ${keyword} + '&idCategory=' + ${idCategory}}">DESCRIPTION</a></th>
+						<th><a th:href="@{'/articulo/list?sortField=category&pageNumber=' + ${currentPage}+'&stringFind=' + ${keyword} + '&idCategory=' + ${idCategory}}">CATEGORY</a></th>
+						<th><a th:href="@{'/articulo/list?sortField=price&pageNumber=' + ${currentPage}+'&stringFind=' + ${keyword}+ '&idCategory=' + ${idCategory}}">PRECIO</a></th>
+						<th><a th:href="@{'/articulo/list?sortField=stock&pageNumber=' + ${currentPage}+'&stringFind=' + ${keyword}+ '&idCategory=' + ${idCategory}}">STOCK</a></th>
 						<th>DELETE</th>
 						<th>UPDATE</th>
 					</tr>
@@ -98,21 +100,21 @@
 		
 	<div>
 	Total Items: <a th:text = "${totalItems}" />
-	<a th:if="${currentPage > 1}" th:href="@{'/articulo/list?pageNumber=1&sortField=' + ${sortField}+'&stringFind=' + ${keyword}}">
+	<a th:if="${currentPage > 1}" th:href="@{'/articulo/list?pageNumber=1&sortField=' + ${sortField}+'&stringFind=' + ${keyword}+ '&idCategory=' + ${idCategory}}">
 	First</a>
 	<span th:unless="${currentPage > 1}">First</span>
-	<a th:if="${currentPage > 1}" th:href="@{'/articulo/list?pageNumber=' + ${currentPage - 1} +'&sortField=' + ${sortField}+'&stringFind=' + ${keyword}}">Previous</a>
+	<a th:if="${currentPage > 1}" th:href="@{'/articulo/list?pageNumber=' + ${currentPage - 1} +'&sortField=' + ${sortField}+'&stringFind=' + ${keyword}+ '&idCategory=' + ${idCategory}}">Previous</a>
 	<span th:unless="${currentPage > 1}">Previous</span>
 	
 	<span th:each="i: ${#numbers.sequence(1, totalPages)}">
-		<a th:if="${currentPage != i}" th:href="@{'/articulo/list?pageNumber=' + ${i} +'&sortField=' + ${sortField}+'&stringFind=' + ${keyword}}" th:text="${i}"></a>
+		<a th:if="${currentPage != i}" th:href="@{'/articulo/list?pageNumber=' + ${i} +'&sortField=' + ${sortField}+'&stringFind=' + ${keyword}+ '&idCategory=' + ${idCategory}}" th:text="${i}"></a>
 		<span th:unless="${currentPage != i}" th:text="${i}"></span>
 	&nbsp;
 	</span>
 	
-	<a th:if="${currentPage < totalPages}" th:href="@{'/articulo/list?pageNumber=' + ${currentPage + 1} +'&sortField=' + ${sortField}+'&stringFind=' + ${keyword}}">Next</a>
+	<a th:if="${currentPage < totalPages}" th:href="@{'/articulo/list?pageNumber=' + ${currentPage + 1} +'&sortField=' + ${sortField}+'&stringFind=' + ${keyword}+ '&idCategory=' + ${idCategory}}">Next</a>
 	<span th:unless="${currentPage < totalPages}">Next</span>
-	<a th:if="${currentPage < totalPages}" th:href="@{'/articulo/list?pageNumber=' + ${totalPages} +'&sortField=' + ${sortField}+'&stringFind=' + ${keyword}}">Last</a>
+	<a th:if="${currentPage < totalPages}" th:href="@{'/articulo/list?pageNumber=' + ${totalPages} +'&sortField=' + ${sortField}+'&stringFind=' + ${keyword}+ '&idCategory=' + ${idCategory}}">Last</a>
 	<span th:unless="${currentPage < totalPages}">Last</span> 
 	</div>
 	</div>

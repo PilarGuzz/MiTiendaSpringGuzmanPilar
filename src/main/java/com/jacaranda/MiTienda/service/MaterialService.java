@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import com.jacaranda.MiTienda.model.Category;
 import com.jacaranda.MiTienda.model.Material;
 import com.jacaranda.MiTienda.repository.MaterialRepository;
 
@@ -17,18 +18,30 @@ public class MaterialService {
 
 	@Autowired
 	private MaterialRepository repository;
+	@Autowired
+	private CategoryService catService;
 
 	public List<Material> findAll() {
 		return repository.findAll();
 	}
-	public Page<Material> findAll(int pageNum, int pageSize, String sortField, String stringFind) {
+	public Page<Material> findAll(int pageNum, int pageSize, String sortField, String stringFind, int idCategoria) {
 		
 		Pageable pageable = PageRequest.of(pageNum-1, pageSize, 
 				Sort.by(sortField).ascending());
-		if(stringFind == null)
-			return repository.findAll(pageable);
-		else
-			return repository.findByNameLike("%" + stringFind + "%", pageable);
+		Category cat = catService.getCategory(idCategoria);
+		if(stringFind == null) {
+			if(idCategoria!=0) {
+				return repository.findByCategory(cat, pageable);
+			}else {
+				return repository.findAll(pageable);
+			}
+		}else {
+			if(idCategoria!=0) {
+				return repository.findByCategory(cat, pageable);
+			}else {
+				return repository.findAll(pageable);
+			}
+		}
 	}
 
 	public Material getItem(Integer id) {

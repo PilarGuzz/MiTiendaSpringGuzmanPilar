@@ -51,11 +51,12 @@ public class WebSecurityConf {
 
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
-		http.authorizeHttpRequests(
-				(requests) -> requests.requestMatchers("/css").permitAll()
-				.requestMatchers("/usuario/**").hasAnyAuthority("ADMIN")
-				.requestMatchers("/articulo/list").hasAnyAuthority("USER", "ADMIN")
-				.requestMatchers("/categoria/list").hasAnyAuthority("USER", "ADMIN")
+		http.authorizeHttpRequests((requests) -> { 
+					requests 
+					.requestMatchers("/css").permitAll()
+					.requestMatchers("/usuario/**").hasAnyAuthority("ADMIN")
+					.requestMatchers("/articulo/list").hasAnyAuthority("USER", "ADMIN")
+					.requestMatchers("/categoria/list").hasAnyAuthority("USER", "ADMIN")
 						.requestMatchers("/articulo/add").hasAuthority("ADMIN")
 						.requestMatchers("/articulo/add/submit").hasAuthority("ADMIN")
 						.requestMatchers("/articulo/delete").hasAuthority("ADMIN")
@@ -71,12 +72,13 @@ public class WebSecurityConf {
 						.requestMatchers("/signUp").permitAll()
 						.requestMatchers("/signUp/submit").permitAll()
 						.requestMatchers("/verify").permitAll()
-						.anyRequest().authenticated())
-						.formLogin((form) -> form
+						.anyRequest().authenticated();
+						}).formLogin((form) -> form
+						.loginPage("/login")
 						.permitAll())
 						.logout((logout) -> logout.permitAll());
-						return http.build();
-						}
+					return http.build();
+	}
 
 
 }

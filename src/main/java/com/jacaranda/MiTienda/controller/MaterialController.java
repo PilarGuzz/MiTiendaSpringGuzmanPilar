@@ -83,12 +83,15 @@ public class MaterialController {
 		Optional<Integer> pageNumber,
 		@RequestParam("sizeNumber") Optional<Integer> sizeNumber,
 		@RequestParam("sortField") Optional<String> sortField,
-		@RequestParam("stringFind") Optional<String> stringFind) {
+		@RequestParam("stringFind") Optional<String> stringFind,
+		@RequestParam("idCategory") Optional<Integer> idCategory) {
 		
 
 		Page<Material> page = service.findAll(pageNumber.orElse(1),
-				sizeNumber.orElse(10), sortField.orElse("id"), stringFind.orElse(null));
+				sizeNumber.orElse(10), sortField.orElse("id"), stringFind.orElse(null), idCategory.orElse(0));
+		
 		model.addAttribute("currentPage",pageNumber.orElse(1));
+		model.addAttribute("idCategory",idCategory.orElse(0));
 		model.addAttribute("totalPages",page.getTotalPages());
 		model.addAttribute("totalItems",page.getTotalElements());
 		model.addAttribute("sortField", sortField.orElse("id"));
