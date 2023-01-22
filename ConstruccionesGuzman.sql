@@ -198,9 +198,11 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`username`, `pass`, `name`, `email`, `admin`, `role`, `verification_code`, `enabled`) VALUES
-('inma', 'd40dbcae0e7088fc4a7e1768cf8771da', 'inma', 'inma@gmail.com', 1, 'ADMIN', null, 1),
-('paco', '311020666a5776c57d265ace682dc46d', 'paco', 'paco@gmail.com', 0, 'USER', null, 1),
-('pilar', '31c7d084f0460fcde98ee9314fc8ef30', 'pilar', 'pilar@gmail.com', 1, 'ADMIN', null, 1);
+('paco', '311020666a5776c57d265ace682dc46d', 'paco', 'paco@gmail.com', 0, 'USER', NULL, 1),
+('pepe', '$2a$10$89TbTgZWnJf8zulmn9Yi8OQ0xoPUyWC6lw75DV2V2SO70fd/JANsK', 'pepe', 'pepe@gmail.com', 0, 'USER', 'Xw4mhL0HNNOLndvKx60HY1xvbOkE4jKt65R6SUeVBi8StLUBVi7ijmLMMzNBKJJc', 1),
+('pilar', '$2a$10$k90O2Bsy95ikz4rv1c6QjulUNyrpW0xH/u5B4fzxhhyHjPa33IUny', 'pilarita', 'pilar.guzman@gmail.com', 1, 'ADMIN', '6aAURda8U1V5z0dEahIqPeP97oTY2I9yO3a4B6UBMCCytA1dBvTSkN9rzk1faTFM', 1),
+('pilar2', '$2a$10$6C5vQQoRDtz6l/ov3UBXi.cbyC8h5lF6GcdPjGU7TYnwuA8zVU/3C', 'pilar2', 'pilar.guzman.28@gmail.com', 0, 'USER', 'wWHgC0GuSsEH32igaBsyxctesZl5gZRsWKz0JH4jIrmZX03TR8sNYK6h39XYjjhR', 1);
+
 
 -- --------------------------------------------------------
 
