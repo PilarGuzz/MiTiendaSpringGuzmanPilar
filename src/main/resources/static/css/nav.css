@@ -1,0 +1,20 @@
+button.botonNav{
+	padding-top: 45px;
+    padding-bottom: 45px;
+}
+
+.logout{
+	padding-right: 30px;
+	display: flex;
+}
+.add{
+	margin-top: 20px;
+}
+.subrayado{
+	text-decoration: none
+}
+
+.onlyAdmin{
+	display: none;
+}
+

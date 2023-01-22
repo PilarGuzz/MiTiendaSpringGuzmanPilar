@@ -62,7 +62,7 @@ public class UserService implements UserDetailsService {
 		}
 
 	public User getUser(String id) {
-		return repository.findById(id).orElse(null);
+		return repository.findByUsername(id);
 	}
 
 	public List<User> getUsers() {
@@ -70,7 +70,9 @@ public class UserService implements UserDetailsService {
 	}
 
 	public User addUser(User user) {
-		user.setPass(getMD5(user.getPass()));
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		String encodedPassword = passwordEncoder.encode(user.getPassword());
+		user.setPass(encodedPassword);
 		user.setAdmin(false);
 
 		return repository.save(user);
@@ -114,8 +116,10 @@ public class UserService implements UserDetailsService {
 
 
 	public User updateUser(User modUser) {
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		String encodedPassword = passwordEncoder.encode(modUser.getPassword());
 		User user = this.getUser(modUser.getUsername());
-		user.setPass(getMD5(modUser.getPass()));
+		user.setPass(encodedPassword);
 		user.setName(modUser.getName());
 		user.setEmail(modUser.getEmail());
 		return repository.save(user);
@@ -124,6 +128,23 @@ public class UserService implements UserDetailsService {
 	public User updateAdmin(User modUser) {
 		User user = this.getUser(modUser.getUsername());
 		user.setAdmin(modUser.isAdmin());
+		if(user.isAdmin()) {
+			user.setRole("ADMIN");
+			
+		}else {
+			user.setRole("USER");
+		}
+		return repository.save(user);
+	}
+	
+	public User updateRole(User modUser) {
+		User user = this.getUser(modUser.getUsername());
+		if(user.getRole().equals("USER")) {
+			user.setRole("ADMIN");
+		}else {
+			user.setRole("USER");	
+		}
+		
 		return repository.save(user);
 	}
 

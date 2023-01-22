@@ -88,14 +88,14 @@ public class MaterialController {
 		
 
 		Page<Material> page = service.findAll(pageNumber.orElse(1),
-				sizeNumber.orElse(10), sortField.orElse("id"), stringFind.orElse(null), idCategory.orElse(0));
+				sizeNumber.orElse(10), sortField.orElse("id"), stringFind.orElse(""), idCategory.orElse(0));
 		
 		model.addAttribute("currentPage",pageNumber.orElse(1));
 		model.addAttribute("idCategory",idCategory.orElse(0));
 		model.addAttribute("totalPages",page.getTotalPages());
 		model.addAttribute("totalItems",page.getTotalElements());
 		model.addAttribute("sortField", sortField.orElse("id"));
-		model.addAttribute("keyword", stringFind.orElse(null));
+		model.addAttribute("keyword", stringFind.orElse(""));
 		model.addAttribute("materials", page.getContent());
 		
 		return "materialList";

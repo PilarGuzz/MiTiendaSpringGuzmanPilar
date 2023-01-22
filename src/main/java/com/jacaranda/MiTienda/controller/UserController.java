@@ -2,8 +2,11 @@ package com.jacaranda.MiTienda.controller;
 
 import java.io.UnsupportedEncodingException;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,9 +28,8 @@ public class UserController {
 	@Autowired
 	UserService service;
 
-	@GetMapping("login")
+	@GetMapping("/login")
 	public String login() {
-
 		return "login";
 
 	}
@@ -53,9 +55,14 @@ public class UserController {
 			}catch (MessagingException e) {
 				return "error";
 			}
-			return "register_success";
+			return "registerSuccess";
 		}else
 			return "error";
+	}
+	
+	@GetMapping("logout")
+	public String logout() {
+		return "logout";
 	}
 
 	@GetMapping("/usuario/add")
@@ -75,8 +82,8 @@ public class UserController {
 		return REDIRECT_USER;
 	}
 
-	@GetMapping("usuario/delete")
-	public String deleteUser(@RequestParam("id") String username, Model model) {
+	@GetMapping("/usuario/delete")
+	public String deleteUser(@RequestParam("username") String username, Model model) {
 
 		User user = service.getUser(username);
 		model.addAttribute("user", user);
@@ -89,16 +96,22 @@ public class UserController {
 
 		service.deleteUser(user.getUsername());
 
-		return REDIRECT_USER;
+		return"redirect:/categoria/list";
 	}
 
 	@GetMapping("usuario/update")
-	public String updateUser(@RequestParam("id") String id, Model model) {
-
-		User user = service.getUser(id);
-		model.addAttribute("user", user);
-
-		return "updateUser";
+	public String updateUser(@RequestParam("username") String username, Model model) {
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User logged = (User) auth.getPrincipal();
+		User user = service.getUser(username);
+		if(logged.getRole().equals("ADMIN") || (logged.getRole().equals("USER")  && logged.getUsername().equals(username))) {
+			
+			model.addAttribute("user", user);
+	
+			return "updateUser";
+		}
+		return "error";
 	}
 
 	@PostMapping("usuario/update/submit")
@@ -110,7 +123,7 @@ public class UserController {
 	}
 
 	@GetMapping("usuario/admin")
-	public String updateUserAdmin(@RequestParam("id") String id, Model model) {
+	public String updateUserAdmin(@RequestParam("username") String id, Model model) {
 
 		User user = service.getUser(id);
 		model.addAttribute("user", user);
@@ -135,6 +148,8 @@ public class UserController {
 		return "usersList";
 	}
 	
+
+	
 	@GetMapping("/verify")
 	public String verification(@RequestParam("code") String code, @RequestParam("username")String username) {
 
@@ -145,6 +160,11 @@ public class UserController {
 			return "error";
 		}
 
+	}
+	
+	@GetMapping("/error403")
+	public String showError() {
+		return"error";
 	}
 
 }

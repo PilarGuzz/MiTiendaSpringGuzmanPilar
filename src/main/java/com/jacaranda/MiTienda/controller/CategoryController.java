@@ -26,9 +26,8 @@ public class CategoryController {
 	private CategoryService service;
 	
 	@GetMapping({"categoria/list", "/" })
-	public String categoriesList(Model model, @RequestParam("pageNumber")
-	
-		Optional<Integer> pageNumber,
+	public String categoriesList(Model model, 
+		@RequestParam("pageNumber") Optional<Integer> pageNumber,
 		@RequestParam("sizeNumber") Optional<Integer> sizeNumber,
 		@RequestParam("sortField") Optional<String> sortField,
 		@RequestParam("stringFind") Optional<String> stringFind) {

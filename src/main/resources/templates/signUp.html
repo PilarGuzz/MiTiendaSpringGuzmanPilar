@@ -10,21 +10,27 @@
 
 <title>Sign Up</title>
 </head>
+<body class = "bg-info bg-gradient">
 
-<section class="vh-100 bg-image">
-  <div class="mask d-flex align-items-center h-100 gradient-custom-3">
-    <div class="container h-100">
+<section class="vh-100 ">
+  
+    <div class="container h-100 py-5 h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
-        <div class="col-12 col-md-9 col-lg-7 col-xl-6">
-          <div class="card" style="border-radius: 15px;">
-            <div class="card-body p-5">
-              <h2 class="text-uppercase text-center mb-5">Create an account</h2>
+        <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        
+        <div class=" text-center">
+        	<img alt="logo" src="/img/logoBL.png" />
+        	</div>
+        	
+          <div class="card bg-dark shadow-2-strong text-white" style="border-radius: 15px;">
+            <div class="card-body p-5 ">
+              <h3 class="text-uppercase text-center mb-5">Create an account</h3>
 
               <form th:action="@{/signUp/submit}" th:object="${user}">
 
                 <div class="form-outline mb-4">
                   <input th:field="*{name}" type="text" id="name" class="form-control form-control-lg" />
-                  <label class="form-label" for="form3Example1cg">name</label>
+                  <label class="form-label" for="form3Example1cg">Name</label>
                 </div>
                 
                 <div class="form-outline mb-4">
@@ -44,20 +50,14 @@
                 </div>
 
 
-                <div class="form-check d-flex justify-content-center mb-5">
-                  <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3cg" />
-                  <label class="form-check-label" for="form2Example3g">
-                    I agree all statements in <a href="#!" class="text-body"><u>Terms of service</u></a>
-                  </label>
-                </div>
-
+               
                 <div class="d-flex justify-content-center">
                   <button type="submit"
-                    class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Register</button>
+                    class="btn btn-primary btn-lg btn-block">Register</button>
                 </div>
 
-                <p class="text-center text-muted mt-5 mb-0">Have already an account? <a href="@{/login}"
-                    class="fw-bold text-body"><u>Login here</u></a></p>
+                <p class="text-white text-center  mt-5 mb-0">Have already an account? <a th:href="@{/login}"
+                    class="text-white-50 fw-bold text-body"><u>Login here</u></a></p>
 
               </form>
 
@@ -66,6 +66,7 @@
         </div>
       </div>
     </div>
-  </div>
+
 </section>
+</body>
 </html>

@@ -53,22 +53,26 @@ public class WebSecurityConf {
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
 		http.authorizeHttpRequests((requests) -> { 
 					requests 
-					.requestMatchers("/css").permitAll()
-					.requestMatchers("/usuario/**").hasAnyAuthority("ADMIN")
+					.requestMatchers("/css/**").permitAll()
+					.requestMatchers("/js/**").permitAll()
+					.requestMatchers("/img/**").permitAll()
+					.requestMatchers("/error").permitAll()
+					.requestMatchers("/usuario/list").hasAnyAuthority("ADMIN")
+					.requestMatchers("/usuario/add").hasAnyAuthority("ADMIN")
+					.requestMatchers("/usuario/admin/**").hasAnyAuthority("ADMIN")
+					.requestMatchers("/usuario/update/**").hasAnyAuthority("USER", "ADMIN")
+					.requestMatchers("/usuario/delete/**").hasAnyAuthority("ADMIN")
 					.requestMatchers("/articulo/list").hasAnyAuthority("USER", "ADMIN")
 					.requestMatchers("/categoria/list").hasAnyAuthority("USER", "ADMIN")
+					.requestMatchers("/").hasAnyAuthority("USER", "ADMIN")
 						.requestMatchers("/articulo/add").hasAuthority("ADMIN")
 						.requestMatchers("/articulo/add/submit").hasAuthority("ADMIN")
-						.requestMatchers("/articulo/delete").hasAuthority("ADMIN")
-						.requestMatchers("/articulo/delete/submit").hasAuthority("ADMIN")
-						.requestMatchers("/articulo/update").hasAuthority("ADMIN")
-						.requestMatchers("/articulo/update/submit").hasAuthority("ADMIN")
+						.requestMatchers("/articulo/delete/**").hasAuthority("ADMIN")
+						.requestMatchers("/articulo/update/**").hasAuthority("ADMIN")
 						.requestMatchers("/categoria/add").hasAuthority("ADMIN")
 						.requestMatchers("/categoria/add/submit").hasAuthority("ADMIN")
-						.requestMatchers("/categoria/delete").hasAuthority("ADMIN")
-						.requestMatchers("/categoria/delete/submit").hasAuthority("ADMIN")
-						.requestMatchers("/categoria/update").hasAuthority("ADMIN")
-						.requestMatchers("/categoria/update/submit").hasAuthority("ADMIN")
+						.requestMatchers("/categoria/delete/**").hasAuthority("ADMIN")
+						.requestMatchers("/categoria/update/**").hasAuthority("ADMIN")
 						.requestMatchers("/signUp").permitAll()
 						.requestMatchers("/signUp/submit").permitAll()
 						.requestMatchers("/verify").permitAll()
@@ -76,7 +80,8 @@ public class WebSecurityConf {
 						}).formLogin((form) -> form
 						.loginPage("/login")
 						.permitAll())
-						.logout((logout) -> logout.permitAll());
+						.logout((logout) -> logout.permitAll())
+						.exceptionHandling().accessDeniedPage("/error403");
 					return http.build();
 	}
 

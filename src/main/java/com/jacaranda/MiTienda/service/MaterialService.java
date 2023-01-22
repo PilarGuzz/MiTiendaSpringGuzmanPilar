@@ -39,7 +39,7 @@ public class MaterialService {
 			if(idCategoria!=0) {
 				return repository.findByCategory(cat, pageable);
 			}else {
-				return repository.findAll(pageable);
+				return repository.findByNameLike("%"+ stringFind + "%", pageable);
 			}
 		}
 	}

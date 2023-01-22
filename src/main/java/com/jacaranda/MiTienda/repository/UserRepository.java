@@ -8,6 +8,7 @@ import com.jacaranda.MiTienda.model.User;
 
 public interface UserRepository extends JpaRepository<User, String> {
 	List<User> findByEmail(String email);
+	User findByUsername(String username);
 			
 		
 }
